@@ -7,7 +7,6 @@ body{
 
 #root{
     margin: 0;
-    background-color: black;
     height: 100vh;
     width: 100%;
     
@@ -15,9 +14,11 @@ body{
 
 .wrapper{
     display: grid;
-    grid-template-columns: repeat(2 , 1fr);
-    height: 80vh;
-    width: 100%;
+    grid-template-areas: 
+    "a b"
+    "c d"
+    ;
+
 }
 
 h1{
@@ -37,14 +38,9 @@ h3{
 }
 
 section{
-    margin-left: 1;
-    min-height: 90%;
-    width: 100%;
-    overflow-y: auto;
-}
-
-button{
-    margin-left: 1%;
+    margin: 15px;
+    height: 400px;
+    width: 905px;
 }
 
 .mostrar{
@@ -53,21 +49,21 @@ button{
 }
 
 .DoNow{
-    background-color: rgb(99, 28, 28);
+    background-color: rgb(98, 151, 194);
 
 }
 
 .Schedule{
-    background-color: rgb(88, 88, 31);
+    background-color: rgb(241, 154, 53);
 
 }
 
 .Delegate{
-    background-color: rgb(55, 88, 55);
+    background-color: rgb(230, 95, 5);
 
 }
 
 .Delete{
-    background-color: rgb(50, 50, 139);
+    background-color: rgb(105, 105, 110);
     
 }
