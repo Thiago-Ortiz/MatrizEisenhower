@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod/dist/zod";
+import { SubmitHandler } from "react-hook-form";
 import "./AddTask.css";
 import DialogDemo from "../Dialog/Dialog";
-import { TFormSchema, validationSchema } from "../FormSchema";
+import { TFormSchema } from "../FormSchema";
+import { CubeIcon } from "@radix-ui/react-icons";
 
 export default function AddTask() {
   const [DoTasks, setDoTasks] = useState<TFormSchema[]>([]);
@@ -13,6 +13,11 @@ export default function AddTask() {
 
   const onSubmit: SubmitHandler<TFormSchema> = (data, e) => {
     data.id = Math.floor(Math.random() * 100000);
+    console.log(data.id);
+    console.log(data.task);
+    console.log(data.description);
+    console.log(data.important);
+    console.log(data.urgent);
     if (data.important == true && data.urgent == true) {
       e?.preventDefault();
       e?.stopPropagation();
@@ -119,9 +124,7 @@ export default function AddTask() {
         </section>
       </div>
 
-      <DialogDemo
-      // onSubmit={this.onSubmit}
-      />
+      <DialogDemo addTask={onSubmit} />
     </>
   );
 }

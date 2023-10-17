@@ -3,14 +3,20 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { TFormSchema, validationSchema } from "../FormSchema";
 import "./Dialog.css";
 import { zodResolver } from "@hookform/resolvers/zod/dist/zod";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as Checkbox from "@radix-ui/react-checkbox";
 import { CheckIcon, Cross2Icon } from "@radix-ui/react-icons";
 
-const DialogDemo = (props) => {
-  const { register, handleSubmit } = useForm<TFormSchema>({
-    resolver: zodResolver(validationSchema),
-  });
+export const DialogDemo = ({ addTask }) => {
+  const { register, handleSubmit } = useForm<TFormSchema>();
+  //{resolver: zodResolver(validationSchema),}
+
+  function CheckBox(data) {
+    console.log(data.task);
+    console.log(data.description);
+    console.log(data.important);
+    console.log(data.urgent);
+  }
 
   return (
     <Dialog.Root>
@@ -22,12 +28,14 @@ const DialogDemo = (props) => {
         <Dialog.Content className="DialogContent">
           <Dialog.Title className="DialogTitle">Add Task</Dialog.Title>
           <Dialog.Description className="DialogDescription"></Dialog.Description>
+
           <fieldset className="Fieldset">
             <label className="Label" htmlFor="task">
               Task
             </label>
             <input className="Input" {...register("task")} />
           </fieldset>
+
           <fieldset className="Fieldset">
             <label className="Label" htmlFor="description">
               Description
@@ -46,7 +54,7 @@ const DialogDemo = (props) => {
             <label className="Label" htmlFor="important">
               Important
             </label>
-            <Checkbox.Root className="CheckboxRoot" id="important">
+            <Checkbox.Root className="CheckboxRoot" {...register("important")}>
               <Checkbox.Indicator className="CheckboxIndicator">
                 <CheckIcon />
               </Checkbox.Indicator>
@@ -55,7 +63,7 @@ const DialogDemo = (props) => {
             <label className="Label" htmlFor="urgent">
               Urgent
             </label>
-            <Checkbox.Root className="CheckboxRoot" id="urgent">
+            <Checkbox.Root className="CheckboxRoot" {...register("urgent")}>
               <Checkbox.Indicator className="CheckboxIndicator">
                 <CheckIcon />
               </Checkbox.Indicator>
@@ -70,11 +78,12 @@ const DialogDemo = (props) => {
             }}
           >
             <Dialog.Close asChild>
-              <button className="Button green" onSubmit={props.onsubmit}>
+              <button className="Button green" onClick={handleSubmit(addTask)}>
                 Submit
               </button>
             </Dialog.Close>
           </div>
+
           <Dialog.Close asChild>
             <button className="IconButton" aria-label="Close">
               <Cross2Icon />
