@@ -76,8 +76,13 @@ export default function AddTask() {
           <hr />
           {DoTasks.map((task) => (
             <div className="mostrar" key={task.id}>
-              <h2>{task.task}: </h2> <h3>{task.description} </h3>
-              <button onClick={() => RemoveTask(task.id, 1)}>
+              <div className="task">
+                <h2>{task.task}:</h2> <h3>{task.description}</h3>
+              </div>
+              <button
+                className="Button red"
+                onClick={() => RemoveTask(task.id, 1)}
+              >
                 remove task
               </button>
             </div>
@@ -89,8 +94,13 @@ export default function AddTask() {
           <hr />
           {ScheduleTasks.map((task) => (
             <div className="mostrar" key={task.id}>
-              <h2>{task.task}: </h2> <h3>{task.description}</h3>
-              <button onClick={() => RemoveTask(task.id, 2)}>
+              <div className="task">
+                <h2>{task.task}:</h2> <h3>{task.description}</h3>
+              </div>
+              <button
+                className="Button red"
+                onClick={() => RemoveTask(task.id, 2)}
+              >
                 remove task
               </button>
             </div>
@@ -102,8 +112,13 @@ export default function AddTask() {
           <hr />
           {DelegateTasks.map((task) => (
             <div className="mostrar" key={task.id}>
-              <h2>{task.task}: </h2> <h3>{task.description}</h3>
-              <button onClick={() => RemoveTask(task.id, 3)}>
+              <div className="task">
+                <h2>{task.task}:</h2> <h3>{task.description}</h3>
+              </div>
+              <button
+                className="Button red"
+                onClick={() => RemoveTask(task.id, 3)}
+              >
                 remove task
               </button>
             </div>
@@ -115,8 +130,11 @@ export default function AddTask() {
           <hr />
           {DeleteTasks.map((task) => (
             <div className="mostrar" key={task.id}>
-              <h2>{task.task}: </h2> <h3>{task.description}</h3>
+              <div className="task">
+                <h2>{task.task}:</h2> <h3>{task.description}</h3>
+              </div>
               <button
+                className="Button red"
                 onClick={() => {
                   RemoveTask(task.id, 4);
                 }}

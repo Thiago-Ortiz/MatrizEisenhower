@@ -93,10 +93,7 @@ export const DialogDemo = ({ addTask }) => {
               <button
                 className="Button green"
                 onClickCapture={() => {
-                  setValue("urgent", urgent),
-                    setValue("important", important),
-                    setImportant(false),
-                    setUrgent(false);
+                  setValue("urgent", urgent), setValue("important", important);
                 }}
                 onClick={handleSubmit(addTask)}
               >
