@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { TFormSchema, validationSchema } from "../FormSchema";
 import "./Dialog.css";
@@ -8,15 +8,18 @@ import * as Checkbox from "@radix-ui/react-checkbox";
 import { CheckIcon, Cross2Icon } from "@radix-ui/react-icons";
 
 export const DialogDemo = ({ addTask }) => {
-  const { register, handleSubmit } = useForm<TFormSchema>();
-  //{resolver: zodResolver(validationSchema),}
+  const { register, handleSubmit, setValue } = useForm<TFormSchema>({
+    resolver: zodResolver(validationSchema),
+  });
+  const [important, setImportant] = useState(false);
+  const [urgent, setUrgent] = useState(false);
 
-  function CheckBox(data) {
-    console.log(data.task);
-    console.log(data.description);
-    console.log(data.important);
-    console.log(data.urgent);
-  }
+  const handleImportantChange = () => {
+    setImportant(!important);
+  };
+  const handleUrgentChange = () => {
+    setUrgent(!urgent);
+  };
 
   return (
     <Dialog.Root>
@@ -54,7 +57,11 @@ export const DialogDemo = ({ addTask }) => {
             <label className="Label" htmlFor="important">
               Important
             </label>
-            <Checkbox.Root className="CheckboxRoot" {...register("important")}>
+            <Checkbox.Root
+              className="CheckboxRoot"
+              checked={important}
+              onCheckedChange={handleImportantChange}
+            >
               <Checkbox.Indicator className="CheckboxIndicator">
                 <CheckIcon />
               </Checkbox.Indicator>
@@ -63,7 +70,12 @@ export const DialogDemo = ({ addTask }) => {
             <label className="Label" htmlFor="urgent">
               Urgent
             </label>
-            <Checkbox.Root className="CheckboxRoot" {...register("urgent")}>
+
+            <Checkbox.Root
+              className="CheckboxRoot"
+              checked={urgent}
+              onCheckedChange={handleUrgentChange}
+            >
               <Checkbox.Indicator className="CheckboxIndicator">
                 <CheckIcon />
               </Checkbox.Indicator>
@@ -78,7 +90,16 @@ export const DialogDemo = ({ addTask }) => {
             }}
           >
             <Dialog.Close asChild>
-              <button className="Button green" onClick={handleSubmit(addTask)}>
+              <button
+                className="Button green"
+                onClickCapture={() => {
+                  setValue("urgent", urgent),
+                    setValue("important", important),
+                    setImportant(false),
+                    setUrgent(false);
+                }}
+                onClick={handleSubmit(addTask)}
+              >
                 Submit
               </button>
             </Dialog.Close>

@@ -116,7 +116,11 @@ export default function AddTask() {
           {DeleteTasks.map((task) => (
             <div className="mostrar" key={task.id}>
               <h2>{task.task}: </h2> <h3>{task.description}</h3>
-              <button onClick={() => RemoveTask(task.id, 4)}>
+              <button
+                onClick={() => {
+                  RemoveTask(task.id, 4);
+                }}
+              >
                 remove task
               </button>
             </div>
